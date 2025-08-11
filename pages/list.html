@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">(Лого) Название компании</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/style/style.css">
+  <script defer src="/js/modal.js"></script>
+  <script defer src="/js/script.js"></script>
+
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-50 font-sans">
+  <script src="data.js"></script>
+  <script src="filters.js"></script>
+  <!-- Header -->
+    <header class="bg-gray-100 sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <!-- <div class="text-2xl font-bold text-blue-600">RE</div> -->
+                <div class="ml-2 text-xl font-semibold">(Лого) Название компании</div>
+            </div>
+
+            <!-- мобильное меню -->
+            <nav id="mobileMenu" class="hidden fixed inset-x-0 top-16 bg-white shadow-md py-4 px-6 space-y-4">
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Недвижимость</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Услуги</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Компания</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Поддержка</a>
+                <a href="tel:+71231232827" class="block text-gray-700 hover:text-blue-600">+7 (123) 123‑28‑27</a>
+            </nav>
+
+
+            <div class="flex items-center space-x-4">
+                <button id="openModalBtn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+                    Заказать звонок
+                </button>
+                <div class="hidden md:block">
+                    <a href="tel:+71231232827" class="text-gray-700 hover:text-blue-600">+7 (123) 123–28–27</a>
+                </div>
+
+                <!-- <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button> -->
+                <button id="burger" class="text-gray-700 hamburger-menu flex flex-col gap-1 p-2 cursor-pointer">
+                    <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                    <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                    <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+  <style>
+    .hamburger-menu.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-menu.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .hamburger-menu {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hamburger-menu span {
+      width: 20px;
+      height: 2px;
+      background: #374151;
+      transition: all 0.3s;
+    }
+  </style>
+
+  <script>
+
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    if (hamburgerMenu) {
+      hamburgerMenu.addEventListener('click', function () {
+        this.classList.toggle('active');
+        
+      });
+    }
+
+    const additionalStyles = `
+    .category-item.active {
+        background: #7c3aed !important;
+        color: white !important;
+        border-color: #7c3aed !important;
+    }
+    
+    .hamburger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger-menu.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+`;
+  </script>
+
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="text-sm text-gray-500 mb-4" aria-label="breadcrumb">
+      <ol class="inline-flex list-none p-0">
+        <li class="flex items-center">
+          <a href="../index.html" class="hover:text-gray-700">Главная</a>
+          <span class="mx-2">/</span>
+        </li>
+        <li class="flex items-center">
+          <span id="bc-list" class="text-gray-700">…</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Page title -->
+    <h1 id="page-title-heading" class="text-3xl font-bold mb-6"></h1>
+
+    <!-- Фильтры -->
+    <section class="container mx-auto mb-6">
+      <div class="flex flex-wrap gap-4">
+        <!-- Фильтр: Площадка -->
+        <div class="relative" data-filter-key="place">
+          <button
+            class="filter-toggle flex items-center gap-2 px-4 py-2
+           bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+           border border-gray-300 border-r-0 rounded-none"
+            data-placeholder="Площадка"> <!-- data-placeholder для сброса -->
+            <span class="filter-label">Площадка</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <ul class="filter-options hidden absolute left-0 mt-2 bg-white rounded-lg shadow-lg py-2 w-64">
+            <!-- Пункты будут генерироваться скриптом -->
+            <!-- Добавим пункт "Все площадки" программно -->
+          </ul>
+        </div>
+
+        <!-- Фильтр: Назначение -->
+        <div class="relative" data-filter-key="purpose">
+          <button
+            class="filter-toggle flex items-center gap-2 px-4 py-2
+           bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+           border border-gray-300 border-r-0 rounded-none"
+            data-placeholder="Назначение">
+            <span class="filter-label">Назначение</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <ul class="filter-options hidden absolute left-0 mt-2 bg-white rounded-lg shadow-lg py-2">
+            <!-- Пункты будут генерироваться скриптом -->
+          </ul>
+        </div>
+
+        <!-- Фильтр: Площадь от -->
+        <div class="relative" data-filter-key="minArea">
+          <button class="filter-toggle flex items-center gap-2 px-4 py-2
+           bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+           border border-gray-300 border-r-0 rounded-none">
+            <span class="filter-label"></span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <ul class="filter-options absolute bg-white shadow rounded mt-2 py-2 w-36"></ul>
+        </div>
+
+        <!-- Фильтр: Площадь до -->
+        <div class="relative" data-filter-key="maxArea">
+          <button class="filter-toggle flex items-center gap-2 px-4 py-2
+           bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+           border border-gray-300 border-r-0 rounded-none">
+            <span class="filter-label"></span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <ul class="filter-options absolute bg-white shadow rounded mt-2 py-2 w-36"></ul>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <style>
+      .filter-options {
+        display: none;
+      }
+
+      .filter-options.show {
+        display: block;
+      }
+
+      .filter-label--dynamic {
+        font-style: italic;
+      }
+    </style>
+
+    <!-- Listings grid -->
+    <div id="listings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-auto bg-gray-900 text-gray-300 pt-16 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <!-- Column 1 -->
+        <div>
+          <div class="flex items-center mb-4">
+            <!-- <div class="text-2xl font-bold text-white">RE</div> -->
+            <div class="ml-2 text-xl font-semibold text-white">(Лого) Название компании</div>
+          </div>
+          <p class="mb-4">
+            Ведущая компания по аренде недвижимости в Санкт-Петербурге
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-vk"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Недвижимость</h3>
+          <ul class="space-y-2">
+            <!-- <li><a href="#" class="hover:text-white">Квартиры</a></li> -->
+            <!-- <li><a href="#" class="hover:text-white">Дома</a></li> -->
+            <li><a href="#" class="hover:text-white">Офисы</a></li>
+            <li><a href="#" class="hover:text-white">Коммерческая недвижимость</a></li>
+            <!-- <li><a href="#" class="hover:text-white">Новостройки</a></li> -->
+          </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Услуги</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-white">Аренда жилья</a></li>
+            <li><a href="#" class="hover:text-white">Аренда офисов</a></li>
+            <li><a href="#" class="hover:text-white">Юридические услуги</a></li>
+            <li><a href="#" class="hover:text-white">Оценка недвижимости</a></li>
+            <li><a href="#" class="hover:text-white">Консультации</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Контакты</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-phone-alt mt-1 mr-2"></i>
+              <div>
+                <a href="tel:+71231232827" class="hover:text-white">+7 (123) 123–28–27</a>
+                <p class="text-sm text-gray-400">Ежедневно с 9:00 до 21:00</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-envelope mr-2"></i>
+              <a href="mailto:info@(Лого) Название компании.ru" class="hover:text-white">info@(Лого) Название
+                компании.ru</a>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-map-marker-alt mr-2"></i>
+              <span>Санкт-Петербург, Невский пр. 100</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          © 2024 (Лого) Название компании. Все права защищены.
+        </div>
+        <div class="flex space-x-4">
+          <a href="#" class="hover:text-white">Условия использования</a>
+          <a href="#" class="hover:text-white">Политика конфиденциальности</a>
+          <a href="#" class="hover:text-white">Карта сайта</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    
+    document.querySelector('.hamburger-menu').onclick = () => {
+      const m = document.getElementById('mobileMenu');
+      m.classList.toggle('hidden');
+    };
+    
+    
+    
+
+    
+    document.addEventListener('DOMContentLoaded', () => {
+
+        function updateBreadcrumbAndHeading() {
+    const bc = document.getElementById('bc-list');
+    const heading = document.getElementById('page-title-heading');
+
+    if (filters.purpose && labels[filters.purpose]) {
+      const label = labels[filters.purpose];
+      bc.textContent = label;
+      heading.textContent = label;
+      document.title = label;
+    } else {
+      bc.textContent = 'Результаты поиска';
+      heading.textContent = 'Результаты поиска';
+      document.title = 'Результаты поиска';
+    }
+  }
+
+
+
+      
+      const url = new URL(location);
+      const purposeFromUrl = url.searchParams.get('purpose'); 
+      const filters = {
+        purpose: url.searchParams.get('purpose'),
+        place: url.searchParams.get('place'),
+        minArea: url.searchParams.get('minArea'),
+        maxArea: url.searchParams.get('maxArea')
+      };
+
+      const suitableFilters = url.searchParams.getAll('suitableFor')
+        .map(decodeURIComponent)
+        .filter(s => s);
+
+      
+      const labels = {
+        land: 'Земельные участки',
+        office: 'Офисные помещения',
+        warehouse: 'Складские помещения',
+        production: 'Производственные',
+        retail: 'Торговые площади'
+      };
+
+      
+      let dataToShow = [];
+      if (purposeFromUrl && dataByPurpose[purposeFromUrl]) {
+        
+        dataToShow = dataByPurpose[purposeFromUrl];
+        document.getElementById('bc-list').textContent = labels[purposeFromUrl];
+        document.getElementById('page-title-heading').textContent = labels[purposeFromUrl];
+        document.title = labels[purposeFromUrl];
+      } else {
+        
+        dataToShow = Object.values(dataByPurpose).flat();
+        document.getElementById('bc-list').textContent = 'Результаты поиска';
+        document.getElementById('page-title-heading').textContent = 'Результаты поиска';
+        document.title = 'Результаты поиска';
+      }
+
+      updateBreadcrumbAndHeading();
+      
+      let allPossiblePlaces = [];
+      let allPossibleAreas = [];
+
+      dataToShow.forEach(item => {
+        if (item.place && !allPossiblePlaces.includes(item.place)) {
+          allPossiblePlaces.push(item.place);
+        }
+        if (item.area !== undefined && !allPossibleAreas.includes(item.area)) {
+          allPossibleAreas.push(item.area);
+        }
+      });
+      allPossibleAreas.sort((a, b) => a - b);
+
+      
+      const placeFilterWrapper = document.querySelector(`[data-filter-key="place"] .filter-options`);
+      if (placeFilterWrapper) {
+        placeFilterWrapper.innerHTML = ''; 
+
+
+
+        
+        allPossiblePlaces.forEach(place => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="#" data-value="${place}" class="block px-4 py-2 hover:bg-purple-100">${place}</a>`;
+          placeFilterWrapper.appendChild(li);
+        });
+      }
+
+      
+      function buildAreaOptions(filterKey) {
+        const areaFilterWrapper = document.querySelector(`[data-filter-key="${filterKey}"] .filter-options`);
+        if (areaFilterWrapper) {
+          areaFilterWrapper.innerHTML = allPossibleAreas.map(area => `
+        <li><a href="#" data-value="${area}" class="block px-4 py-2 hover:bg-purple-100">${area} м²</a></li>
+      `).join('');
+          
+          const anyOption = document.createElement('li');
+          const labelText = filterKey === 'minArea' ? 'Любая от' : 'Любая до';
+          anyOption.innerHTML = `<a href="#" data-value="" class="block px-4 py-2 hover:bg-purple-100 font-medium">${labelText}</a>`;
+          areaFilterWrapper.insertBefore(anyOption, areaFilterWrapper.firstChild);
+        }
+      }
+      buildAreaOptions('minArea');
+      buildAreaOptions('maxArea');
+      generatePurposeOptions();
+
+      
+      function updateFilterButtonLabels() {
+        
+        const placeWrapper = document.querySelector(`[data-filter-key="place"]`);
+        if (placeWrapper) {
+          const placeButton = placeWrapper.querySelector('.filter-toggle .filter-label');
+          const placeholder = placeWrapper.querySelector('.filter-toggle').dataset.placeholder || 'Площадка';
+          if (filters.place && filters.place !== "") {
+            const selectedOption = placeWrapper.querySelector(`.filter-options a[data-value="${filters.place}"]`);
+            if (selectedOption) {
+              placeButton.textContent = selectedOption.textContent;
+              placeWrapper.querySelector('.filter-toggle').classList.add('bg-indigo-600', 'text-white');
+            } else {
+              placeButton.textContent = placeholder;
+              placeWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
+            }
+          } else {
+            placeButton.textContent = placeholder;
+            placeWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
+          }
+        }
+
+        
+        const purposeWrapper = document.querySelector(`[data-filter-key="purpose"]`);
+        if (purposeWrapper) {
+          const purposeButton = purposeWrapper.querySelector('.filter-toggle .filter-label');
+          const placeholder = purposeWrapper.querySelector('.filter-toggle').dataset.placeholder || 'Любое назначение';
+          if (filters.purpose && filters.purpose !== "") {
+            
+            const purposeLabels = {
+              land: 'Земельные участки',
+              office: 'Офисные помещения',
+              warehouse: 'Складские помещения',
+              production: 'Производственные',
+              retail: 'Торговые площади'
+            };
+            const selectedLabel = purposeLabels[filters.purpose] || filters.purpose;
+            purposeButton.textContent = selectedLabel;
+            purposeWrapper.querySelector('.filter-toggle').classList.add('bg-indigo-600', 'text-white');
+          } else {
+            purposeButton.textContent = placeholder;
+            purposeWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
+          }
+        }
+
+        
+        const minAreaWrapper = document.querySelector(`[data-filter-key="minArea"]`);
+        if (minAreaWrapper) {
+          const minAreaButton = minAreaWrapper.querySelector('.filter-toggle .filter-label');
+          const minAll = Math.min(...allPossibleAreas);
+          if (filters.minArea !== null && filters.minArea !== "") {
+            minAreaButton.textContent = `От ${filters.minArea} м²`;
+            minAreaWrapper.querySelector('.filter-toggle').classList.add('bg-indigo-600', 'text-white');
+          } else {
+            minAreaButton.textContent = `От ${minAll} м²`;
+            minAreaWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
+          }
+        }
+
+        
+        const maxAreaWrapper = document.querySelector(`[data-filter-key="maxArea"]`);
+        if (maxAreaWrapper) {
+          const maxAreaButton = maxAreaWrapper.querySelector('.filter-toggle .filter-label');
+          const maxAll = Math.max(...allPossibleAreas);
+          if (filters.maxArea !== null && filters.maxArea !== "") {
+            maxAreaButton.textContent = `До ${filters.maxArea} м²`;
+            maxAreaWrapper.querySelector('.filter-toggle').classList.add('bg-indigo-600', 'text-white');
+          } else {
+            maxAreaButton.textContent = `До ${maxAll} м²`;
+            maxAreaWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
+          }
+        }
+      }
+      updateFilterButtonLabels();
+
+
+      
+      function renderListings() {
+
+        let effectiveDataToShow = dataToShow; 
+        if (filters.purpose && dataByPurpose[filters.purpose]) {
+
+          effectiveDataToShow = dataByPurpose[filters.purpose];
+        }
+        
+        
+        const filteredData = effectiveDataToShow.filter(item => {
+          
+          if (filters.place && filters.place !== "" && item.place !== filters.place) {
+            return false;
+          }
+
+          
+          
+
+
+          
+          if (filters.minArea !== null && filters.minArea !== "" && item.area < Number(filters.minArea)) {
+            return false;
+          }
+          
+          if (filters.maxArea !== null && filters.maxArea !== "" && item.area > Number(filters.maxArea)) {
+            return false;
+          }
+
+          
+          if (suitableFilters.length > 0) {
+            
+            if (!Array.isArray(item.suitableFor)) return false;
+
+            
+            const hasMatch = item.suitableFor.some(serv =>
+              suitableFilters.includes(serv)
+            );
+            if (!hasMatch) return false;
+          }
+
+
+
+          return true;
+        });
+
+
+        if (typeof updateAreaFilterOptions === 'function') {
+          updateAreaFilterOptions(filteredData);
+        } else {
+          console.warn('Функция updateAreaFilterOptions не найдена. Списки фильтров площади не будут обновляться.');
+        }
+
+
+        
+        const container = document.getElementById('listings');
+        container.innerHTML = '';
+
+        if (filteredData.length === 0) {
+          container.innerHTML = '<p class="col-span-full text-center text-gray-500">По заданным критериям объекты не найдены.</p>';
+          return;
+        }
+
+        
+        filteredData.forEach(item => {
+          
+          let itemPurpose = purposeFromUrl;
+          if (!itemPurpose) {
+            for (const [key, items] of Object.entries(dataByPurpose)) {
+              if (items.includes(item)) {
+                itemPurpose = key;
+                break;
+              }
+            }
+          }
+
+          
+          const imageUrl = Array.isArray(item.images) ? item.images[0] : item.images;
+
+          const a = document.createElement('a');
+          a.href = `detail.html?purpose=${itemPurpose || 'land'}&id=${item.id}`;
+          a.className = 'block bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition';
+          a.innerHTML = `
+        <img src="${imageUrl}" alt="${item.name}" class="w-full h-32 object-cover" onerror="this.src='https://placehold.co/400x200?text=Image+Not+Found'">
+        <div class="p-4">
+          <h3 class="font-semibold mb-1">${item.name}</h3>
+          <p class="text-gray-600 text-sm mb-2">Площадь: ${item.area} м²</p>
+          ${item.place ? `<p class="text-gray-500 text-xs mb-2">${item.place}</p>` : ''}
+          <p class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+            Подробнее <i class="fas fa-arrow-right ml-2"></i>
+          </p>
+        </div>`;
+          container.appendChild(a);
+        });
+      }
+
+
+      
+      
+      function updateAreaFilterOptions(filteredData) {
+        if (!filteredData || !Array.isArray(filteredData)) {
+          console.error('updateAreaFilterOptions: filteredData должен быть массивом');
+          return;
+        }
+
+        
+        const uniqueAreasFromFilteredData = [...new Set(filteredData.map(item => {
+          
+          const area = item.area;
+          return (typeof area === 'number' || (typeof area === 'string' && !isNaN(area))) ? Number(area) : null;
+        }).filter(area => area !== null))].sort((a, b) => a - b);
+
+        
+        const minAreaMenu = document.querySelector('[data-filter-key="minArea"] .filter-options');
+        if (minAreaMenu) {
+          
+          let areasToShow = [...uniqueAreasFromFilteredData];
+          
+          if (filters.maxArea !== null && filters.maxArea !== "") {
+            const maxLimit = Number(filters.maxArea);
+            areasToShow = areasToShow.filter(area => area <= maxLimit);
+          }
+          
+          minAreaMenu.innerHTML = areasToShow.map(area => `
+        <li><a href="#" data-value="${area}" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">${area} м²</a></li>
+      `).join('');
+
+        }
+
+        
+        const maxAreaMenu = document.querySelector('[data-filter-key="maxArea"] .filter-options');
+        if (maxAreaMenu) {
+          
+          let areasToShow = [...uniqueAreasFromFilteredData];
+          
+          if (filters.minArea !== null && filters.minArea !== "") {
+            const minLimit = Number(filters.minArea);
+            areasToShow = areasToShow.filter(area => area >= minLimit);
+          }
+          
+          maxAreaMenu.innerHTML = areasToShow.map(area => `
+      <li><a href="#" data-value="${area}" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">${area} м²</a></li>
+    `).join('');
+
+        }
+      }
+
+      
+function attachFilterHandlers() {
+  document.querySelectorAll('.relative[data-filter-key]').forEach(wrapper => {
+    const key    = wrapper.dataset.filterKey;
+    const button = wrapper.querySelector('.filter-toggle');
+    const menu   = wrapper.querySelector('.filter-options');
+    if (!button || !menu) return;
+
+    // Открытие/закрытие дропдауна
+    button.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('.filter-options.show')
+        .forEach(m => m.classList.remove('show'));
+      menu.classList.toggle('show');
+    });
+
+    // Выбор опции
+    menu.addEventListener('click', e => {
+      const option = e.target.closest('a[data-value]');
+      if (!option) return;
+      e.preventDefault();
+
+      const selectedValue = option.dataset.value;
+      const selectedText  = option.textContent.trim();
+      const wasSelected   = filters[key] === selectedValue;
+      const isEmpty       = selectedValue === "" || selectedValue === undefined;
+
+      // Сброс классов
+      menu.querySelectorAll('a')
+        .forEach(a => a.classList.remove('bg-indigo-600', 'text-white'));
+      button.classList.remove('bg-indigo-600', 'text-white');
+
+      let filtersChanged = false;
+      let areaFixNeeded  = false;
+
+      if (wasSelected || isEmpty) {
+        // Сброс фильтра
+        delete filters[key];
+        filtersChanged = true;
+        const placeholder = button.dataset.placeholder
+          || (key === 'place'   ? 'Площадка'
+            : key === 'purpose' ? 'Назначение'
+            : `Выберите ${key}`);
+        button.querySelector('.filter-label').textContent = placeholder;
+
+      } else {
+        // Коррекция диапазона площади, если нужно
+        if (key === 'minArea' && filters.maxArea && +selectedValue > +filters.maxArea) {
+          delete filters.maxArea;
+          areaFixNeeded = true;
+        }
+        if (key === 'maxArea' && filters.minArea && +selectedValue < +filters.minArea) {
+          delete filters.minArea;
+          areaFixNeeded = true;
+        }
+
+        // Установка нового фильтра
+        filters[key] = selectedValue;
+        filtersChanged = true;
+
+        // Подсветка выбранного пункта
+        option.classList.add('bg-indigo-600', 'text-white');
+        button.classList.add('bg-indigo-600', 'text-white');
+
+        // Обновление текста кнопки
+        if (key === 'minArea') {
+          button.querySelector('.filter-label').textContent = `От ${selectedValue} м²`;
+        } else if (key === 'maxArea') {
+          button.querySelector('.filter-label').textContent = `До ${selectedValue} м²`;
+        } else if (key === 'place') {
+          button.querySelector('.filter-label').textContent = selectedText;
+        } else if (key === 'purpose') {
+          button.querySelector('.filter-label').textContent = labels[selectedValue] || selectedText;
+        }
+      }
+
+      menu.classList.remove('show');
+
+      if (filtersChanged || areaFixNeeded) {
+        // Обновление URL
+        const currentUrl = new URL(window.location);
+        Object.entries(filters).forEach(([k, v]) => {
+          if (v) currentUrl.searchParams.set(k, v);
+          else    currentUrl.searchParams.delete(k);
+        });
+        if (purposeFromUrl && !currentUrl.searchParams.has('purpose')) {
+          currentUrl.searchParams.set('purpose', purposeFromUrl);
+        }
+        history.pushState(null, '', currentUrl);
+
+        // Обновление заголовка и крошек при смене назначения
+        if (key === 'purpose') {
+          updateBreadcrumbAndHeading();
+        }
+      }
+
+      // Перерисовка списка
+      renderListings();
+    });
+  });
+
+  // Закрыть все дропдауны при клике вне
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.filter-options.show')
+      .forEach(m => m.classList.remove('show'));
+  });
+}
+
+
+
+      
+      renderListings();
+      attachFilterHandlers();
+
+ 
+      
+    });
+
+    
+    function generatePurposeOptions() {
+      const wrapper = document.querySelector('[data-filter-key="purpose"] .filter-options');
+      if (!wrapper) return;
+
+      const labels = {
+        land: 'Земельные участки',
+        office: 'Офисные помещения',
+        warehouse: 'Складские помещения',
+        production: 'Производственные',
+        retail: 'Торговые площади'
+      };
+
+      wrapper.innerHTML = Object.keys(dataByPurpose)
+        .map(k => `<li><a href="#" data-value="${k}" class="block px-4 py-2 hover:bg-purple-100">
+                 ${labels[k] ?? k}
+               </a></li>`).join('');
+    }
+
+
+  </script>
+
+
+
+    <!-- Modal -->
+    <div id="modal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="modal-overlay absolute inset-0"></div>
+        <div class="modal-container bg-white w-full max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 px-6">
+                <div class="flex justify-between items-center pb-3">
+                    <h3 class="text-xl font-bold">Оставьте заявку</h3>
+                    <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-gray-700 mb-1">Имя <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="name"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-gray-700 mb-1">Телефон <span
+                                class="text-red-500">*</span></label>
+                        <input type="tel" id="phone"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="property-type" class="block text-gray-700 mb-1">Тип недвижимости</label>
+                        <select id="property-type"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Выберите тип</option>
+                            <option value="apartment">Квартира</option>
+                            <option value="house">Дом</option>
+                            <option value="office">Офис</option>
+                            <option value="commercial">Коммерческая</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-gray-700 mb-1">Сообщение</label>
+                        <textarea id="message" rows="3"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div class="text-sm text-gray-500">
+                        <span class="text-red-500">*</span> Обязательные поля. Мы свяжемся с вами в течение 30 минут.
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition">
+                        Отправить заявку
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

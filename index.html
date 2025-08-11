@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Недвижимость - Название компании</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <script defer src="js/script.js"></script>
+    <script defer src="js/modal.js"></script>
+    <script defer src="js/burger.js"></script>
+    <script defer src="js/dropdown-menu.js"></script>
+    <script defer src="js/slider.js"></script>
+    <script defer src="pages/data.js"></script>
+    <script defer src="js/aside.js"></script>
+    <script defer src="js/service_main.js"></script>
+</head>
+
+<body class="font-sans bg-gray-50">
+    
+    
+    <header class="bg-gray-100 sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                
+                <div class="ml-2 text-xl font-semibold">(Лого) Название компании</div>
+            </div>
+
+            
+            <nav id="mobileMenu" class="hidden fixed inset-x-0 top-16 bg-white shadow-md py-4 px-6 space-y-4">
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Недвижимость</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Услуги</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Компания</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Поддержка</a>
+                <a href="tel:+71231232827" class="block text-gray-700 hover:text-blue-600">+7 (123) 123‑28‑27</a>
+            </nav>
+
+
+            <div class="flex items-center space-x-4">
+                <button id="openModalBtn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+                    Заказать звонок
+                </button>
+                <div class="hidden md:block">
+                    <a href="tel:+71231232827" class="text-gray-700 hover:text-blue-600">+7 (123) 123–28–27</a>
+                </div>
+                <button id="burger" class="text-gray-700 hamburger-menu flex flex-col gap-1 p-2 cursor-pointer">
+                    <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                    <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                    <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    
+<section class="relative pb-20 lg:pb-0">
+  
+  <img
+    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=400&fit=crop"
+    alt="Герой"
+    class="w-full h-100 object-cover" />
+
+  
+  <div
+    class="
+      relative                
+      lg:absolute lg:top-full 
+      lg:-mt-16               
+      lg:left-1/2 lg:-translate-x-1/2 
+      
+      inset-x-0 mx-auto       
+      w-full md:w-3/4 lg:w-2/3 
+      
+      bg-white/90 backdrop-blur-sm shadow-sm rounded-lg
+      px-4 py-4 flex flex-wrap justify-center items-center gap-4
+
+      z-20
+    "
+  >
+<div class="inline-flex"></div>
+    
+    <div class="relative inline-block w-36" data-filter-key="place">
+  <button
+    class="filter-toggle flex items-center gap-2 px-4 py-2
+           bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+           border border-gray-300 border-r-0 rounded-none"
+    data-placeholder="Площадка">
+        <span class="filter-label">Площадка</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <ul class="filter-options hidden
+           absolute left-0 right-0  
+           mt-2 bg-white rounded-lg shadow-lg py-2">
+        <li><a href="#" data-value="Кушелевская дорога" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Кушелевская дорога</a></li>
+        <li><a href="#" data-value="Лабораторный проспект" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Лабораторный проспект</a></li>
+        <li><a href="#" data-value="Бестужевская" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Бестужевская</a></li>
+        <li><a href="#" data-value="АО «Сестрорецкий инструментальный»" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">АО «Сестрорецкий инструментальный»</a></li>
+      </ul>
+    </div>
+
+    
+    <div class="relative inline-block w-36" data-filter-key="purpose">
+      <button
+        class="filter-toggle flex items-center gap-2 px-4 py-2
+           bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+           border border-gray-300 border-r-0 rounded-none"
+        data-placeholder="Назначение">
+        <span class="filter-label">Назначение</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <ul class="filter-options hidden
+           absolute left-0 right-0  
+           mt-2 bg-white rounded-lg shadow-lg py-2">
+        <li><a href="#" data-value="office" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Офисные помещения</a></li>
+        <li><a href="#" data-value="production" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Производственные</a></li>
+        <li><a href="#" data-value="warehouse" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Складские</a></li>
+        <li><a href="#" data-value="retail" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Торговые площади</a></li>
+        <li><a href="#" data-value="land" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Земельные участки</a></li>
+      </ul>
+    </div>
+
+    
+<div class="relative inline-block w-36" data-filter-key="minArea">
+  <button
+    class="filter-toggle w-full flex justify-between items-center
+           px-4 py-2 bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+           border border-gray-300 rounded-none"
+    data-placeholder="Площадь от"
+  >
+    <span class="filter-label">Площадь от</span>
+    <i class="fas fa-chevron-down"></i>
+  </button>
+
+  <ul
+    class="filter-options hidden absolute left-0 right-0 mt-2
+           w-full bg-white rounded-lg shadow-lg py-2"
+  >
+    <li><a href="#" data-value="0"   class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">0 м²</a></li>
+    <li><a href="#" data-value="50"  class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">50 м²</a></li>
+    <li><a href="#" data-value="100" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">100 м²</a></li>
+    <li><a href="#" data-value="200" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">200 м²</a></li>
+  </ul>
+</div>
+
+
+    
+<div class="relative inline-block w-36" data-filter-key="maxArea">
+  
+  <button
+    class="filter-toggle flex items-center justify-between
+           w-full h-10 px-4
+           bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+           border border-gray-300 rounded-none"
+    data-placeholder="Площадь до"
+  >
+    <span class="filter-label">Площадь до</span>
+    <i class="fas fa-chevron-down"></i>
+  </button>
+
+  
+  <ul
+    class="filter-options hidden absolute left-0 mt-2
+           w-full bg-white rounded-lg shadow-lg py-2"
+  >
+    <li><a href="#" data-value="100" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">100 м²</a></li>
+    <li><a href="#" data-value="200" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">200 м²</a></li>
+    <li><a href="#" data-value="500" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">500 м²</a></li>
+    <li><a href="#" data-value="1000" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">1000 м²</a></li>
+  </ul>
+</div>
+
+
+
+    
+  <div class="flex flex-col sm:flex-row gap-3 ml-auto">
+    <button class="show-results bg-indigo-600 hover:bg-indigo-700 text-white h-10 px-6 rounded-md">
+      Показать предложения
+    </button>
+    <a href="#mapSection"
+       class="flex items-center gap-1 h-10 px-6 rounded-md border border-indigo-600
+              text-indigo-600 hover:bg-indigo-50 transition"> <i class="fas fa-map-marker-alt"></i>
+      Смотреть на карте
+    </a>
+  </div>
+
+        </div>
+
+  </div>
+</section>
+
+
+    
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Сервисы</h2>
+
+        
+        <div id="selected-categories" class="mb-6 flex flex-wrap gap-2 min-h-8">
+            
+        </div>
+
+        <div id="show-results-container" class="flex justify-center mt-4 mb-2 hidden">
+            <button id="show-results-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition transform hover:scale-105">
+                Показать (<span id="result-count">0</span>)
+            </button>
+        </div>
+
+        <div class="flex justify-center gap-4 mb-4 flex-wrap">
+            
+            <div class="dropdown relative">
+                <button
+                    class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg flex justify-between items-center transition category-btn"
+                    data-category="Ветеринария">
+                    <span>Ветеринария</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute z-10 w-full top-full bg-white rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Ветеринария" data-service="Вет клиника">Вет клиника</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Ветеринария" data-service="Вет аптека">Вет аптека</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Ветеринария" data-service="Зоомагазин">Зоомагазин</a>
+                </div>
+            </div>
+
+            
+            <div class="dropdown relative">
+                <button
+                    class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg flex justify-between items-center transition category-btn"
+                    data-category="Спорт">
+                    <span>Спорт</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute z-10 w-full top-full bg-white rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Спорт" data-service="Киберспорт">Киберспорт</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Спорт" data-service="Фитнес">Фитнес</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Спорт" data-service="Футбол">Футбол</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Спорт" data-service="Волейбол">Волейбол</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Спорт" data-service="Картинг">Картинг</a>
+                </div>
+            </div>
+
+            
+            <div class="dropdown relative">
+                <button
+                    class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg flex justify-between items-center transition category-btn"
+                    data-category="Торговля">
+                    <span>Торговля</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute z-10 w-full top-full bg-white rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Торговля" data-service="Магазин">Магазин</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Торговля" data-service="Павильоны">Павильоны</a>
+                </div>
+            </div>
+
+            
+            <div class="dropdown relative">
+                <button
+                    class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg flex justify-between items-center transition category-btn"
+                    data-category="Автосервис">
+                    <span>Автосервис</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute z-10 w-full top-full bg-white rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Автосервис" data-service="Автомойка">Автомойка</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Автосервис" data-service="Детейлинг">Детейлинг</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Автосервис" data-service="Сервис">Сервис</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Автосервис" data-service="Шоурум">Шоурум</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Автосервис" data-service="Магазин">Магазин</a>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center gap-4 flex-wrap">
+            
+            <div class="dropdown relative">
+                <button
+                    class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg flex justify-between items-center transition category-btn"
+                    data-category="Общепит">
+                    <span>Общепит</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute z-10 w-full top-full bg-white rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Общепит" data-service="Ресторан">Ресторан</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Общепит" data-service="Кафе">Кафе</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Общепит" data-service="Фудтрак">Фудтрак</a>
+                </div>
+            </div>
+
+            
+            <div class="dropdown relative">
+                <button
+                    class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg flex justify-between items-center transition category-btn"
+                    data-category="Медицина">
+                    <span>Медицина</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute z-10 w-full top-full bg-white rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Медицина" data-service="Аптека">Аптека</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Медицина" data-service="Мед центр">Мед центр</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Медицина" data-service="Реабилитационный центр">Реабилитационный центр</a>
+                </div>
+            </div>
+
+            
+            <div class="dropdown relative">
+                <button
+                    class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg flex justify-between items-center transition category-btn"
+                    data-category="Досуговое пространство">
+                    <span>Досуговое пространство</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute z-10 w-full top-full bg-white rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Досуговое пространство" data-service="Административное здание">Административное здание</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Досуговое пространство" data-service="Офис">Офис</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Досуговое пространство" data-service="Коворкинг">Коворкинг</a>
+                </div>
+            </div>
+
+            
+            <div class="dropdown relative">
+                <button
+                    class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg flex justify-between items-center transition category-btn"
+                    data-category="Бьюти сфера">
+                    <span>Бьюти сфера</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute z-10 w-full top-full bg-white rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Бьюти сфера" data-service="Салон красоты">Салон красоты</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Бьюти сфера" data-service="Спа салон">Спа салон</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Бьюти сфера" data-service="Банный комплекс">Банный комплекс</a>
+                </div>
+            </div>
+
+            
+            <div class="dropdown relative">
+                <button
+                    class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg flex justify-between items-center transition category-btn"
+                    data-category="Детское образование">
+                    <span>Детское образование</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute z-10 w-full top-full bg-white rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Детское образование" data-service="Школа">Школа</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Детское образование" data-service="Детский сад">Детский сад</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Детское образование" data-service="Спорт">Спорт</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 service-item" data-category="Детское образование" data-service="Секции">Секции</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="bg-gray-50 py-8">
+    <div class="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <div class="bg-white rounded-lg shadow p-4 lg:col-span-1">
+            <h3 class="text-xl font-semibold mb-4">Реклама</h3>
+
+            <div id="adSlider" class="relative overflow-hidden h-72">
+                <div id="adSlides" class="flex transition-transform duration-500 ease-linear h-full w-full">
+                    
+                </div>
+                <button id="adPrev"
+                    class="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full shadow bg-white bg-opacity-80 hover:bg-opacity-100 transition-all lg:flex hidden">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="adNext"
+                    class="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full shadow bg-white bg-opacity-80 hover:bg-opacity-100 transition-all lg:flex hidden">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="sitesBlock" class="bg-white rounded-lg shadow p-4 lg:col-span-2">
+            <h3 class="text-xl font-semibold mb-4">Площадки</h3>
+            <div id="siteList" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+        </div>
+    </div>
+</section>
+
+
+    
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Услуги</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                
+                <div class="bg-gray-50 hover:bg-gray-100 p-6 rounded-lg transition text-center">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">ИТ услуги</h3>
+                    <p class="text-gray-600"> Комплексные IT решения для бизнеса</p>
+                </div>
+
+                
+                <div class="bg-gray-50 hover:bg-gray-100 p-6 rounded-lg transition text-center">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Маркетинг</h3>
+                    <p class="text-gray-600">Продвижение бизнеса и реклама</p>
+                </div>
+
+                
+                <div class="bg-gray-50 hover:bg-gray-100 p-6 rounded-lg transition text-center">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Юридические услуги</h3>
+                    <p class="text-gray-600">Полное юридическое сопровождение</p>
+                </div>
+
+                
+                <div class="bg-gray-50 hover:bg-gray-100 p-6 rounded-lg transition text-center">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Консультация</h3>
+                    <p class="text-gray-600">Профессиональные консультации</p>
+                </div>
+
+                
+                <div class="bg-gray-50 hover:bg-gray-100 p-6 rounded-lg transition text-center">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Прочее</h3>
+                    <p class="text-gray-600">Дополнительные услуги</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="mapSection" class="pt-16 bg-white">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+            Наши объекты на карте
+        </h2>
+        <div class="w-full overflow-hidden">
+            <div id="map" class="w-full h-[500px]"></div>
+        </div>
+
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+<script>
+  ymaps.ready(function () {
+    
+    const map = new ymaps.Map("map", {
+      center: [59.982286, 30.382180],
+      zoom: 12
+    });
+
+
+    
+    window.filters = window.filters || { place: null, purpose: null, minArea: null, maxArea: null };
+
+    
+    function createBalloonContent(lands) {
+      const first = lands[0];
+      const place = first.place;
+      const desc  = placeDescriptions[place] || 'Описание временно отсутствует.';
+      const total = lands.reduce((sum, o) => sum + Number(o.area || 0), 0);
+      const listUrl = `pages/list.html?place=${encodeURIComponent(place)}`;
+
+      let html = `<div style="padding:15px;font-family:Arial,sans-serif;">`;
+      if (lands.length === 1) {
+        const detailUrl = `pages/detail.html?id=${first.id}`;
+        html += `
+          <h3 style="margin:0 0 10px;color:#333;">${first.name}</h3>
+          <p style="margin-bottom:8px;">${desc}</p>
+          <p><strong>Площадь:</strong> ${first.area} м²</p>
+          <div style="margin-top:15px;">
+            <a href="${detailUrl}" style="color:#007bff;text-decoration:none;font-weight:bold;">Подробнее →</a>
+          </div>`;
+      } else {
+        html += `
+          <h3 style="margin:0 0 10px;color:#333;">${place}</h3>
+          <p style="margin-bottom:8px;">${desc}</p>
+          <p><strong>Участков:</strong> ${lands.length}</p>
+          <p><strong>Общая площадь:</strong> ${total} м²</p>
+          <div style="margin-top:15px;">
+            <a href="${listUrl}" style="color:#007bff;text-decoration:none;font-weight:bold;">Показать все объекты →</a>
+          </div>`;
+      }
+      html += `</div>`;
+      return html;
+    }
+
+    
+    const objectsByCoords = new Map();
+    Object.values(dataByPurpose).forEach(arr => {
+      arr.forEach(item => {
+        if (!item.coordinates) return;
+        const key = item.coordinates.join(',');
+        if (!objectsByCoords.has(key)) objectsByCoords.set(key, []);
+        objectsByCoords.get(key).push(item);
+      });
+    });
+
+    
+    const placemarks = [];
+    objectsByCoords.forEach((lands, coordKey) => {
+      const coords = coordKey.split(',').map(Number);
+      const place  = lands[0].place;
+      const pm = new ymaps.Placemark(
+        coords,
+        {
+          hintContent: `📍 ${place}`,
+          balloonContent: createBalloonContent(lands),
+          placeName: place
+        },
+        {
+          iconLayout: 'default#imageWithContent',
+          iconImageHref: '',
+          iconImageSize: [60, 60],
+          iconImageOffset: [-30, -60],
+          iconContentLayout: ymaps.templateLayoutFactory.createClass(
+            `<div style="font-size:40px;line-height:1;">📍</div>`
+          ),
+          iconContentOffset: [0, 0]
+        }
+      );
+      placemarks.push(pm);
+      map.geoObjects.add(pm);
+    });
+
+    
+    function fitMapToBounds() {
+      const bounds = map.geoObjects.getBounds();
+      if (bounds) {
+        map.setBounds(bounds, {
+          checkZoomRange: true,
+          zoomMargin: 20
+        });
+      }
+    }
+
+    
+    function updateMarkersVisibility() {
+      const filter = window.filters.place;
+      placemarks.forEach(pm => {
+        const pmPlace = pm.properties.get('placeName');
+        pm.options.set('visible', !filter || pmPlace === filter);
+      });
+      fitMapToBounds();
+    }
+
+    
+    fitMapToBounds();
+
+    
+    const mapBtn = document.querySelector('a[href="#mapSection"]');
+    if (mapBtn) {
+      mapBtn.addEventListener('click', e => {
+        e.preventDefault();
+        updateMarkersVisibility();
+        document.getElementById('mapSection')
+          .scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    
+    
+  });
+</script>
+
+
+
+    </section>
+
+    
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                
+                <div>
+                    <div class="flex items-center mb-4">
+                        
+                        <div class="ml-2 text-xl font-semibold text-white"> (Лого) Название компании</div>
+                    </div>
+                    <p class="mb-4">
+                        Ведущая компания по аренде недвижимости в Санкт-Петербурге
+                    </p>
+                    <div class="flex space-x-4">
+                        <!-- <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a> -->
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Недвижимость</h3>
+                    <ul class="space-y-2">
+                        
+                        
+                        <li><a href="#" class="hover:text-white">Офисы</a></li>
+                        <li><a href="#" class="hover:text-white">Коммерческая недвижимость</a></li>
+                        
+                    </ul>
+                </div>
+
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Услуги</h3>
+                    <ul class="space-y-2">
+                        
+                        <li><a href="#" class="hover:text-white">Аренда офисов</a></li>
+                        <li><a href="#" class="hover:text-white">Юридические услуги</a></li>
+                        <li><a href="#" class="hover:text-white">Оценка недвижимости</a></li>
+                        <li><a href="#" class="hover:text-white">Консультации</a></li>
+                    </ul>
+                </div>
+
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2"></i>
+                            <div>
+                                <a href="tel:+71231232827" class="hover:text-white">+7 (123) 123–28–27</a>
+                                <p class="text-sm text-gray-400">Ежедневно с 9:00 до 18:00</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:info@Название компании.ru" class="hover:text-white">info@Название
+                                компании.ru</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Санкт-Петербург, Невский пр. 100</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    © 2024 Название компании. Все права защищены.
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-white">Условия использования</a>
+                    <a href="#" class="hover:text-white">Политика конфиденциальности</a>
+                    <a href="#" class="hover:text-white">Карта сайта</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <div id="modal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="modal-overlay absolute inset-0"></div>
+        <div class="modal-container bg-white w-full max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 px-6">
+                <div class="flex justify-between items-center pb-3">
+                    <h3 class="text-xl font-bold">Оставьте заявку</h3>
+                    <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-gray-700 mb-1">Имя <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="name"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-gray-700 mb-1">Телефон <span
+                                class="text-red-500">*</span></label>
+                        <input type="tel" id="phone"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="property-type" class="block text-gray-700 mb-1">Тип недвижимости</label>
+                        <select id="property-type"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Выберите тип</option>
+                            <option value="apartment">Квартира</option>
+                            <option value="house">Дом</option>
+                            <option value="office">Офис</option>
+                            <option value="commercial">Коммерческая</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-gray-700 mb-1">Сообщение</label>
+                        <textarea id="message" rows="3"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div class="text-sm text-gray-500">
+                        <span class="text-red-500">*</span> Обязательные поля. Мы свяжемся с вами в течение 30 минут.
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition">
+                        Отправить заявку
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+
+</html>

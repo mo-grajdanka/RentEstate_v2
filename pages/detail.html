@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">(Лого) Название компании</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/style/style.css">
+  <script defer src="/js/modal.js"></script>
+  <script defer src="/js/script.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-50 font-sans">
+  <script src="data.js"></script>
+  
+  <header class="bg-gray-100 sticky top-0 z-50 shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center">
+        
+        <div class="ml-2 text-xl font-semibold">(Лого) Название компании</div>
+      </div>
+
+      
+      <nav id="mobileMenu" class="hidden fixed inset-x-0 top-16 bg-white shadow-md py-4 px-6 space-y-4">
+        <a href="#" class="block text-gray-700 hover:text-blue-600">Недвижимость</a>
+        <a href="#" class="block text-gray-700 hover:text-blue-600">Услуги</a>
+        <a href="#" class="block text-gray-700 hover:text-blue-600">Компания</a>
+        <a href="#" class="block text-gray-700 hover:text-blue-600">Поддержка</a>
+        <a href="tel:+71231232827" class="block text-gray-700 hover:text-blue-600">+7 (123) 123‑28‑27</a>
+      </nav>
+
+
+      <div class="flex items-center space-x-4">
+        <button id="openModalBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+          Заказать звонок
+        </button>
+        <div class="hidden md:block">
+          <a href="tel:+71231232827" class="text-gray-700 hover:text-blue-600">+7 (123) 123–28–27</a>
+        </div>
+
+        <button id="burger" class="text-gray-700 hamburger-menu flex flex-col gap-1 p-2 cursor-pointer">
+          <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+          <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+          <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <style>
+    .hamburger-menu.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger-menu.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-menu.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .hamburger-menu {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hamburger-menu span {
+      width: 20px;
+      height: 2px;
+      background: #374151;
+      transition: all 0.3s;
+    }
+  </style>
+
+  <script>
+
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    if (hamburgerMenu) {
+      hamburgerMenu.addEventListener('click', function () {
+        this.classList.toggle('active');
+        
+      });
+    }
+
+    const additionalStyles = `
+    .category-item.active {
+        background: #7c3aed !important;
+        color: white !important;
+        border-color: #7c3aed !important;
+    }
+    
+    .hamburger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger-menu.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+`;
+  </script>
+
+  <main class="flex-grow container mx-auto px-4 py-8">
+    
+    <nav class="text-sm text-gray-500 mb-4" aria-label="breadcrumb">
+      <ol class="inline-flex list-none p-0">
+        <li class="flex items-center">
+          <a href="../index.html" class="hover:text-gray-700">Главная</a>
+          <span class="mx-2">/</span>
+        </li>
+        <li class="flex items-center">
+          <a id="bc-list" href="#" class="hover:text-gray-700">…</a>
+          <span class="mx-2">/</span>
+        </li>
+        <li id="bc-item" class="flex items-center text-gray-700"></li>
+      </ol>
+    </nav>
+
+    
+    <div class="relative bg-white rounded-lg shadow overflow-hidden mb-8">
+      <img id="main-img" src="" alt="" class="w-full h-[200px] sm:h-[400px] object-cover">
+      <button id="prev" class="hidden sm:block absolute left-2 top-1/2 transform -translate-y-1/2
+         text-3xl text-white bg-black bg-opacity-30 p-2 rounded-full">
+        ‹
+      </button>
+      <button id="next" class="hidden sm:block absolute right-2 top-1/2 transform -translate-y-1/2
+         text-3xl text-white bg-black bg-opacity-30 p-2 rounded-full">
+        ›
+      </button>
+    </div>
+
+    
+    <div class="grid lg:grid-cols-3 gap-6 mb-12">
+      <section class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+        <h1 id="item-name" class="text-3xl font-bold mb-2"></h1>
+        <p id="item-extra" class="text-gray-600 mb-4"></p>
+        <ul id="item-features" class="list-disc list-inside text-gray-700"></ul>
+
+        <div>
+          <h2 class="text-xl font-semibold mb-3">Описание</h2>
+          <p id="item-description" class="text-gray-700 mb-3"></p>
+        </div>
+
+        <div class="mt-6">
+          <h2 class="text-xl font-semibold mb-3">Возможные бизнесы</h2>
+          <p id="item-suitable-for" class="text-gray-700 mb-3">Информация отсутствует.</p>
+        </div>
+        
+        <hr class="t-layout-divider">
+
+
+        
+        
+        <div class="grid md:grid-cols-2 gap-6 mt-6">
+          
+          <div>
+            <h3 class="text-lg font-medium mb-3">Характеристики</h3>
+            <ul id="item-characteristics-list" class="list-disc list-inside text-gray-700 space-y-1"></ul>
+          </div>
+
+          
+          <div class="md:border-l md:border-gray-300 md:pl-6">
+            <h3 class="text-lg font-medium mb-3">Технические характеристики</h3>
+            <ul id="item-technical-characteristics-list" class="list-disc list-inside text-gray-700 space-y-1"></ul>
+          </div>
+        </div>
+
+
+
+
+
+      </section>
+      <aside class="bg-white rounded-lg shadow p-6 flex flex-col justify-between">
+        <div>
+          <h3 class="font-semibold mb-2">ФИО эксперта</h3>
+          <p class="text-gray-600 mb-4">+7 (123) 123‑45‑67</p>
+          <p class="text-gray-600">expert@(Лого) Название компании.ru</p>
+        </div>
+        <button class="mt-6 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">
+          Консультация эксперта
+        </button>
+      </aside>
+    </div>
+
+    
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4">Вас могут заинтересовать</h2>
+      <div id="related" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+  </main>
+
+  
+  <footer class="mt-auto bg-gray-900 text-gray-300 pt-16 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        
+        <div>
+          <div class="flex items-center mb-4">
+            
+            <div class="ml-2 text-xl font-semibold text-white">(Лого) Название компании</div>
+          </div>
+          <p class="mb-4">
+            Ведущая компания по аренде недвижимости в Санкт-Петербурге
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-vk"></i></a>
+          </div>
+        </div>
+
+        
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Недвижимость</h3>
+          <ul class="space-y-2">
+            
+            
+            <li><a href="#" class="hover:text-white">Офисы</a></li>
+            <li><a href="#" class="hover:text-white">Коммерческая недвижимость</a></li>
+            
+          </ul>
+        </div>
+
+        
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Услуги</h3>
+          <ul class="space-y-2">
+            
+            <li><a href="#" class="hover:text-white">Аренда офисов</a></li>
+            <li><a href="#" class="hover:text-white">Юридические услуги</a></li>
+            <li><a href="#" class="hover:text-white">Оценка недвижимости</a></li>
+            <li><a href="#" class="hover:text-white">Консультации</a></li>
+          </ul>
+        </div>
+
+        
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">Контакты</h3>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-phone-alt mt-1 mr-2"></i>
+              <div>
+                <a href="tel:+71231232827" class="hover:text-white">+7 (123) 123–28–27</a>
+                <p class="text-sm text-gray-400">Ежедневно с 9:00 до 21:00</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-envelope mr-2"></i>
+              <a href="mailto:info@(Лого) Название компании.ru" class="hover:text-white">info@(Лого) Название
+                компании.ru</a>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-map-marker-alt mr-2"></i>
+              <span>Санкт-Петербург, Невский пр. 100</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          © 2024 (Лого) Название компании. Все права защищены.
+        </div>
+        <div class="flex space-x-4">
+          <a href="#" class="hover:text-white">Условия использования</a>
+          <a href="#" class="hover:text-white">Политика конфиденциальности</a>
+          <a href="#" class="hover:text-white">Карта сайта</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      document.querySelector('.hamburger-menu').onclick = () => {
+        document.getElementById('mobileMenu').classList.toggle('hidden');
+      };
+
+
+      
+      const params = new URLSearchParams(window.location.search);
+      const purpose = params.get('purpose') || 'land';
+      const id = +params.get('id');
+      const item = (dataByPurpose[purpose] || []).find(x => x.id === id);
+      if (!item) {
+        document.body.innerHTML = '<p class="text-center text-red-500 mt-20">Объект не найден.</p>';
+        throw '';
+      }
+
+      
+      const labels = {
+        land: 'Земельные участки',
+        office: 'Офисные помещения',
+        warehouse: 'Складские помещения',
+        production: 'Производственные',
+        retail: 'Торговые площади'
+      };
+      const bcList = document.getElementById('bc-list');
+      bcList.textContent = labels[purpose];
+      bcList.href = `list.html?purpose=${purpose}`;
+      document.getElementById('bc-item').textContent = item.name;
+      document.getElementById('page-title').textContent = `${item.name} – RentEstate`;
+      document.title = `${item.name} – RentEstate`;
+      document.getElementById('item-name').textContent = item.name;
+      document.getElementById('item-extra').textContent = item.place
+        ? `Площадка: ${item.place}`
+        : item.floor
+          ? `Этаж: ${item.floor}`
+          : '';
+      const features = [];
+      
+      features.push(`Площадь: ${item.area} м²`);
+      
+      if (item.place) {
+        features.push(`Площадка: ${item.place}`);
+      }
+      
+      if (item.floor !== undefined) {
+        features.push(`Этаж: ${item.floor}`);
+      }
+      
+      const ul = document.getElementById('item-features');
+      ul.innerHTML = features.map(f => `<li>${f}</li>`).join('');
+
+      
+      const imgs = item.images;
+      let idx = 0;
+      const imgEl = document.getElementById('main-img');
+      function show(i) {
+        idx = (i + imgs.length) % imgs.length;
+        imgEl.src = imgs[idx];
+      }
+
+      
+      const AUTO_DELAY = 3000;
+      let autoTimer = setInterval(() => show(idx + 1), AUTO_DELAY);
+
+      
+      document.getElementById('prev').addEventListener('click', () => {
+        clearInterval(autoTimer);
+        show(idx - 1);
+        autoTimer = setInterval(() => show(idx + 1), AUTO_DELAY);
+      });
+      document.getElementById('next').addEventListener('click', () => {
+        clearInterval(autoTimer);
+        show(idx + 1);
+        autoTimer = setInterval(() => show(idx + 1), AUTO_DELAY);
+      });
+
+      
+      show(0);
+
+
+
+      
+      const related = document.getElementById('related');
+      dataByPurpose[purpose]
+        .filter(x => x.id !== id)
+        .slice(0, 4)
+        .forEach(x => {
+          const a = document.createElement('a');
+          a.href = `detail.html?purpose=${purpose}&id=${x.id}`;
+          a.className = 'block bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition';
+          a.innerHTML = `
+  <img src="${x.images[0] || x.img}" alt="${x.name}" class="w-full h-32 object-cover">
+  <div class="p-4">
+    <h3 class="font-semibold mb-1">${x.name}</h3>
+    
+    <p class="text-gray-600 text-sm mb-2">Площадь: ${x.area} м²</p>
+    <p class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+      Подробнее <i class="fas fa-arrow-right ml-2"></i>
+    </p>
+  </div>`;
+          related.append(a);
+        });
+
+
+
+
+
+
+      
+      
+      const descriptionElement = document.getElementById('item-description');
+      if (descriptionElement) {
+        descriptionElement.textContent = item.description || 'Описание отсутствует.';
+      }
+
+      const suitableForElement = document.getElementById('item-suitable-for');
+      if (suitableForElement) {
+        if (item.suitableFor && Array.isArray(item.suitableFor) && item.suitableFor.length > 0) {
+
+          suitableForElement.textContent = item.suitableFor.join(', ');
+        } else {
+          suitableForElement.textContent = 'Информация отсутствует.';
+        }
+      }
+
+      
+      const characteristicsList = document.getElementById('item-characteristics-list');
+      if (characteristicsList) {
+        characteristicsList.innerHTML = ''; 
+        if (item.characteristics && Array.isArray(item.characteristics) && item.characteristics.length > 0) {
+          item.characteristics.forEach(char => {
+            const li = document.createElement('li');
+            
+            li.textContent = char.label && char.value ? `${char.label}: ${char.value}` : 'Некорректные данные';
+            characteristicsList.appendChild(li);
+          });
+        } else {
+          const li = document.createElement('li');
+          li.textContent = 'Характеристики не указаны.';
+          characteristicsList.appendChild(li);
+        }
+      }
+
+      const technicalCharacteristicsList = document.getElementById('item-technical-characteristics-list');
+      if (technicalCharacteristicsList) {
+        technicalCharacteristicsList.innerHTML = ''; 
+        if (item.technicalCharacteristics && Array.isArray(item.technicalCharacteristics) && item.technicalCharacteristics.length > 0) {
+          item.technicalCharacteristics.forEach(char => {
+            const li = document.createElement('li');
+            
+            li.textContent = char.label && char.value ? `${char.label}: ${char.value}` : 'Некорректные данные';
+            technicalCharacteristicsList.appendChild(li);
+          });
+        } else {
+          const li = document.createElement('li');
+          li.textContent = 'Технические характеристики не указаны.';
+          technicalCharacteristicsList.appendChild(li);
+        }
+      }
+
+    });     
+  </script>
+
+
+  
+  <div id="modal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
+    <div class="modal-overlay absolute inset-0"></div>
+    <div class="modal-container bg-white w-full max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+      <div class="modal-content py-4 px-6">
+        <div class="flex justify-between items-center pb-3">
+          <h3 class="text-xl font-bold">Оставьте заявку</h3>
+          <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <form id="contactForm" class="space-y-4">
+          <div>
+            <label for="name" class="block text-gray-700 mb-1">Имя <span class="text-red-500">*</span></label>
+            <input type="text" id="name"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+          </div>
+
+          <div>
+            <label for="phone" class="block text-gray-700 mb-1">Телефон <span class="text-red-500">*</span></label>
+            <input type="tel" id="phone"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+          </div>
+
+          <div>
+            <label for="email" class="block text-gray-700 mb-1">Email</label>
+            <input type="email" id="email"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label for="property-type" class="block text-gray-700 mb-1">Тип недвижимости</label>
+            <select id="property-type"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="">Выберите тип</option>
+              <option value="apartment">Квартира</option>
+              <option value="house">Дом</option>
+              <option value="office">Офис</option>
+              <option value="commercial">Коммерческая</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-gray-700 mb-1">Сообщение</label>
+            <textarea id="message" rows="3"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          </div>
+
+          <div class="text-sm text-gray-500">
+            <span class="text-red-500">*</span> Обязательные поля. Мы свяжемся с вами в течение 30 минут.
+          </div>
+
+          <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition">
+            Отправить заявку
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
